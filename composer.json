@@ -1,0 +1,31 @@
+{
+  "name": "chastephp/laravel-extras",
+  "description": "a laravel extras.",
+  "keywords": [
+    "laravel"
+  ],
+  "require": {
+    "php": "^7.1.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "ChastePhp\\LaravelExtras\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "ChastePhp\\LaravelExtras\\Providers\\ExtraServiceProvider"
+      ]
+    }
+  },
+  "authors": [
+    {
+      "name": "widdy",
+      "email": "kingwide@foxmail.com"
+    }
+  ]
+}
