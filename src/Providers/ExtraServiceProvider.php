@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Arr;
-use Illuminate\Http\JsonResponse;
 
 class ExtraServiceProvider extends ServiceProvider
 {
@@ -35,7 +34,7 @@ class ExtraServiceProvider extends ServiceProvider
          * success
          * @param  $msg string
          * @param  $data mixed
-         * @return JsonResponse
+         * @return Illuminate\Http\JsonResponse
          */
         Response::macro('success', function (string $msg = 'success', $data = null) {
             $ret = ['code' => 0, 'message' => $msg, 'data' => $data];
@@ -55,7 +54,7 @@ class ExtraServiceProvider extends ServiceProvider
          * error
          * @param  $msg string
          * @param  $data mixed
-         * @return JsonResponse
+         * @return Illuminate\Http\JsonResponse
          */
         Response::macro('error', function (string $msg = 'error', $data = null) {
             $ret = ['code' => 1, 'message' => $msg, 'data' => $data];
@@ -75,7 +74,7 @@ class ExtraServiceProvider extends ServiceProvider
          * system error, illegal request ...
          * @param  $msg string
          * @param  $data mixed
-         * @return JsonResponse
+         * @return Illuminate\Http\JsonResponse
          */
         Response::macro('bad', function (string $msg = 'service unavailable ', $data = null) {
             $ret = ['code' => -1, 'message' => $msg, 'data' => $data];
@@ -95,7 +94,7 @@ class ExtraServiceProvider extends ServiceProvider
          * unauthenticated or token expired
          * @param  $msg string
          * @param  $data mixed
-         * @return JsonResponse
+         * @return Illuminate\Http\JsonResponse
          */
         Response::macro('unauthenticated', function (string $msg = 'unauthenticated', $data = null) {
             $ret = ['code' => 40001, 'message' => $msg, 'data' => $data];
