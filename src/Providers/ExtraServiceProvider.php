@@ -43,11 +43,10 @@ class ExtraServiceProvider extends ServiceProvider
         Route::macro('api', function ($name, $controller, $only = ['list', 'create', 'update', 'info', 'delete']) {
             $name = rtrim($name, '/').'/';
             $only = (array) $only;
-            in_array('list', $only) && $this->get($name.'list', join('@', [$controller, 'list']));
-            in_array('create', $only) && $this->post($name.'create', join('@', [$controller, 'create']));
-            in_array('update', $only) && $this->post($name.'update', join('@', [$controller, 'update']));
-            in_array('info', $only) && $this->get($name.'info', join('@', [$controller, 'info']));
-            in_array('delete', $only) && $this->post($name.'delete', join('@', [$controller, 'delete']));
+            in_array('create', $only) && $this->post($name.'create', join('@', [$controller, 'create']))->name($name.'create');
+            in_array('update', $only) && $this->post($name.'update', join('@', [$controller, 'update']))->name($name.'update');
+            in_array('info', $only) && $this->get($name.'info', join('@', [$controller, 'info']))->name($name.'info');
+            in_array('delete', $only) && $this->post($name.'delete', join('@', [$controller, 'delete']))->name($name.'delete');
         });
 
 
