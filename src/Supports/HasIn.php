@@ -28,7 +28,7 @@ class HasIn extends HasMany
     {
         return collect($models)->map(function ($value) use ($key) {
             return $key ? $value->getAttribute($key) : $value->getKey();
-        })->values()->unique(null, true)->flatten()->sort()->all();
+        })->values()->flatten()->unique(null, true)->sort()->all();
     }
 
     protected function matchOneOrMany(array $models, Collection $results, $relation, $type): array
@@ -57,7 +57,7 @@ class HasIn extends HasMany
     public function addConstraints()
     {
         if (static::$constraints) {
-            $this->query->whereIn($this->foreignKey, $this->getParentKey());
+            $this->query->whereIn($this->foreignKey, (array)$this->getParentKey());
 
             $this->query->whereNotNull($this->foreignKey);
         }
