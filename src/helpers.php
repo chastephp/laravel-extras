@@ -7,17 +7,18 @@
 if (!function_exists('model')) {
     /**
      * return a new Eloquent model with given table name.
-     * we use function `eval` to generate an anonymous class(extend Illuminate\Database\Eloquent\Model),
-     * so please ensure that the table name is not from user's input which is not safe.
      *
      * @param $table
-     * @param  array  $attributes
      * @return \Illuminate\Database\Eloquent\Model|Eloquent
      */
-    function model(string $table, array $attributes = [])
+    function model(string $table)
     {
-        return eval('return new class($attributes) extends Illuminate\Database\Eloquent\Model {
-            protected $table = \''.$table.'\';  
-        };');
+        return new class($table) extends Illuminate\Database\Eloquent\Model {
+            public function __construct($table)
+            {
+                $this->setTable($table);
+                parent::__construct();
+            }
+        };
     }
 }
