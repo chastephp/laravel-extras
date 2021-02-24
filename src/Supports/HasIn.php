@@ -40,8 +40,8 @@ class HasIn extends HasMany
         // matching very convenient and easy work. Then we'll just return them.
         foreach ($models as $model) {
             $keys = (array) $model->getAttribute($this->localKey);
+            $related = [];
             foreach ($keys as $key) {
-                $related = [];
                 if (isset($dictionary[$key])) {
                     $related = array_merge($related, $dictionary[$key]);
                 }
@@ -57,7 +57,7 @@ class HasIn extends HasMany
     public function addConstraints()
     {
         if (static::$constraints) {
-            $this->query->whereIn($this->foreignKey, (array)$this->getParentKey());
+            $this->query->whereIn($this->foreignKey, $this->getParentKey());
 
             $this->query->whereNotNull($this->foreignKey);
         }
