@@ -24,3 +24,20 @@ if (!function_exists('model')) {
         };
     }
 }
+
+if (!function_exists('array_sort_by_indexes')) {
+    /**
+     * 二维数组按照指定key指定顺序排序
+     * @param  array  $array
+     * @param  array  $indexes
+     * @param  string  $key
+     * @return array
+     */
+    function array_sort_by_indexes(array $array, array $indexes, string $key = 'id'): array
+    {
+        usort($array, function ($a, $b) use ($indexes, $key) {
+            return (array_search($a[$key], $indexes) < array_search($b[$key], $indexes)) ? -1 : 1;
+        });
+        return $array;
+    }
+}
